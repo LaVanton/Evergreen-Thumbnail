@@ -12,32 +12,32 @@
    ============================================ */
 const GALLERY_ITEMS = [
   {
-    src: 'images/thumb-1.png',
+    src: 'thumb-1.png',
     alt: 'Travel thumbnail — $1,200 experience, Thailand bathroom scene',
     title: 'Recently Divorced Bachelor Leaves Virginia For Thailand | Tour His Luxury Penthouse Condo With Me',
   },
   {
-    src: 'images/thumb-2.png',
+    src: 'thumb-2.png',
     alt: 'Erewhon Store Review',
     title: 'Eating At The MOST EXPENSIVE Grocery Store In LA | We Starving',
   },
   {
-    src: 'images/thumb-3.png',
+    src: 'thumb-3.png',
     alt: 'Mia Khalifa standing in front of warzone, ISIS',
     title: 'From Adult Actress To Being Targeted By ISIS: Mia Khalifa',
   },
   {
-    src: 'images/thumb-4.png',
+    src: 'thumb-4.png',
     alt: 'The Over-Therapization of Society',
     title: 'The Over-Therapization of Society',
   },
   {
-    src: 'images/thumb-5.png',
-    alt: 'Angela White Finally Squashing Beef W/ Heather, Celebrating 2yrs of Sobriety, Baptism, Kids + More',
-    title: 'Angela White Finally Squashing Beef W/ Heather, Celebrating 2yrs of Sobriety, Baptism, Kids + More',
+    src: 'thumb-5.png',
+    alt: 'Blac Chyna Finally Squashing Beef W/ Heather, Celebrating 2yrs of Sobriety, Baptism, Kids + More',
+    title: 'Blac Chyna Finally Squashing Beef W/ Heather, Celebrating 2yrs of Sobriety, Baptism, Kids + More',
   },
   {
-    src: 'images/thumb-6.png',
+    src: 'thumb-6.png',
     alt: 'G Herbo On Facing PTSD, Pressures of Being A Role Model, Being Sh*t, Mental Health, New Music + More',
     title: 'G Herbo On Facing PTSD, Pressures of Being A Role Model, Being Sh*t, Mental Health, New Music + More',
   },
@@ -51,19 +51,29 @@ const lightboxClose = document.getElementById('lightboxClose');
 const lightboxBackdrop = document.getElementById('lightboxBackdrop');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
+/* Resolve image path: "thumb-1.png" → "images/thumb-1.png"; "images/..." or "http..." left as-is */
+function imageSrc(src) {
+  if (!src) return '';
+  if (src.startsWith('http') || src.startsWith('images/')) return src;
+  return 'images/' + src;
+}
+
 /* ---------- Render gallery ---------- */
 function renderGallery(items) {
   if (!galleryGrid) return;
   galleryGrid.innerHTML = items
     .map(
-      (item, i) => `
+      (item, i) => {
+        const src = imageSrc(item.src);
+        return `
     <article class="gallery-item" data-category="${item.category || ''}" data-index="${i}">
-      <a href="${item.src}" class="gallery-item__link" data-full="${item.src}" data-alt="${escapeHtml(item.alt)}" data-title="${escapeHtml(item.title || '')}" aria-label="View ${escapeHtml(item.alt)}">
-        <img class="gallery-item__img" src="${item.src}" alt="${escapeHtml(item.alt)}" loading="lazy" width="640" height="360">
+      <a href="${src}" class="gallery-item__link" data-full="${src}" data-alt="${escapeHtml(item.alt)}" data-title="${escapeHtml(item.title || '')}" aria-label="View ${escapeHtml(item.alt)}">
+        <img class="gallery-item__img" src="${src}" alt="${escapeHtml(item.alt)}" loading="lazy" width="640" height="360">
       </a>
       ${item.title ? `<p class="gallery-item__title">${escapeHtml(item.title)}</p>` : ''}
     </article>
-  `
+  `;
+      }
     )
     .join('');
 
@@ -151,5 +161,43 @@ function observeGalleryItems() {
   items.forEach((item) => observer.observe(item));
 }
 
+/* ---------- Hero view count (0 → 1M, loops) ---------- */
+function formatViews(n) {
+  return Math.floor(n).toLocaleString();
+}
+
+function runViewsCountAnimation() {
+  const el = document.getElementById('heroViewsCount');
+  if (!el) return;
+  const duration = 2500;
+  const start = 0;
+  const end = 1000000;
+  const startTime = performance.now();
+
+  function update(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 2);
+    const value = start + (end - start) * eased;
+    el.textContent = formatViews(value);
+    if (t < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = formatViews(end);
+      loopViewsCount();
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+function loopViewsCount() {
+  const el = document.getElementById('heroViewsCount');
+  if (!el) return;
+  el.textContent = '0';
+  runViewsCountAnimation();
+}
+
 /* ---------- Init ---------- */
 renderGallery(GALLERY_ITEMS);
+runViewsCountAnimation();

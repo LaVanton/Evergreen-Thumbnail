@@ -87,6 +87,7 @@ a {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: black;
 }
 
 .hero__youtube-logo {
@@ -107,6 +108,27 @@ a {
   margin: 0;
   font-size: 1rem;
   color: var(--text-muted);
+}
+
+.hero__views {
+  margin: var(--space-md) 0 0;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  opacity: 0;
+  animation: heroViewsFadeIn 0.6s ease-out 0.2s forwards;
+}
+
+@keyframes heroViewsFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero__views-count {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.8125rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- Section Titles ---------- */
