@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Evergreen Thumbnail — Professional YouTube thumbnail design. Thumbnails that drive clicks and stand the test of time.">
+  <meta name="keywords" content="YouTube thumbnail design, thumbnail agency, video thumbnails, click-through thumbnails">
+  <meta name="author" content="Evergreen Thumbnail">
+  <meta property="og:title" content="Evergreen Thumbnail — Thumbnails That Click">
+  <meta property="og:description" content="Professional YouTube thumbnail design. Thumbnails that drive clicks and stand the test of time.">
+  <meta property="og:type" content="website">
+  <title>Evergreen Thumbnail — Thumbnails That Click. Every Time.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- ========== HERO ========== -->
+  <header class="hero" id="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Evergreen Thumbnail</h1>
+      <img class="hero__youtube-logo" src="images/YouTube_Logo.png" alt="YouTube" width="120" height="27">
+      <p class="hero__tagline">Thumbnails that click. Every time.</p>
+      <p class="hero__desc">Professional YouTube thumbnails designed to drive clicks and stand the test of time—no flash, no fade.</p>
+    </div>
+  </header>
+
+  <!-- ========== GALLERY ========== -->
+  <main class="gallery-section" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Work</h2>
+      <nav class="gallery-filters" aria-label="Filter thumbnails by category">
+        <button type="button" class="filter-btn active" data-filter="all">All</button>
+      </nav>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Thumbnails are injected by script.js from the GALLERY_ITEMS array -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ========== LIGHTBOX ========== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="View thumbnail" hidden>
+    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Close">×</button>
+    <div class="lightbox__content">
+      <img class="lightbox__img" id="lightboxImg" src="" alt="">
+      <p class="lightbox__caption" id="lightboxCaption"></p>
+    </div>
+    <div class="lightbox__backdrop" id="lightboxBackdrop"></div>
+  </div>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get in touch</h2>
+      <p class="contact-intro">Ready for thumbnails that perform? Drop a line.</p>
+      <!-- Option A: Mailto link (replace with your email) -->
+      <a href="mailto:hello@evergreenthumbnail.com" class="cta-button">hello@evergreenthumbnail.com</a>
+      <!-- Option B: Uncomment below for a simple form (requires a form service or backend) -->
+      <!--
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label for="email">Your email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required placeholder="Tell me about your channel and what you need."></textarea>
+        <button type="submit" class="cta-button">Send message</button>
+      </form>
+      -->
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__copy">Evergreen Thumbnail © 2025</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
